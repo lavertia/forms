@@ -1,9 +1,11 @@
 # Lavertia Forms
 
-Experimental private package for form descriptors and fields.
+**Experimental v0.2 package, no stable release.**
 
-**Status:** Work in progress for Lavertia v0.2. No stable release or Packagist package is available.
+Lavertia Forms describes composable forms and fields as PHP components. The standalone PHP implementation is under review in [PR #2](https://github.com/lavertia/forms/pull/2). The `main` branch is a repository scaffold until that PR is verified and merged.
 
-The Laravel / Inertia implementation and compatibility layer will be tested in feature branches before this package becomes the canonical source.
+Forms do **not** persist request data on their own. The consuming Laravel application must enforce authentication, CSRF, Form Requests, Policies and allowlisted persistence.
 
-See [Lavertia release readiness](https://github.com/lavertia/lavertia/issues/3).
+See the [Lavertia documentation](https://lavertia.github.io/lavertia-doc/), [release-readiness issue](https://github.com/lavertia/lavertia/issues/3), and [security policy](SECURITY.md).
+
+**License:** MIT; see [LICENSE.md](LICENSE.md). A public source repository is not a production-ready Composer release.
