@@ -1,0 +1,29 @@
+{
+  "name": "lavertia/forms",
+  "description": "PHP-first composable form and field descriptors for Lavertia / Inertia",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^8.3",
+    "ext-mbstring": "*",
+    "lavertia/support": "^0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lavertia\\Forms\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Lavertia\\Forms\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5 || ^12.0",
+    "laravel/pint": "^1.27"
+  },
+  "scripts": {
+    "test": "@php vendor/bin/phpunit",
+    "lint": "@php vendor/bin/pint --test"
+  }
+}
