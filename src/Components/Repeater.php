@@ -44,7 +44,7 @@ final class Repeater extends AbstractComponent implements ComposesComponents, Fi
     }
 
     /**
-     * @param list<Component> $components
+     * @param  list<Component>  $components
      */
     public function schema(array $components): static
     {
@@ -82,7 +82,7 @@ final class Repeater extends AbstractComponent implements ComposesComponents, Fi
      * Prefill each row with JSON-safe field values. These are client display
      * defaults, never a trusted source for authorization or persistence.
      *
-     * @param list<array<string, mixed>> $rows
+     * @param  list<array<string, mixed>>  $rows
      */
     public function defaultRows(array $rows): static
     {
