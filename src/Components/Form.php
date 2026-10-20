@@ -82,8 +82,7 @@ final class Form extends AbstractComponent implements ComposesComponents
         }
 
         foreach ($props as $prop) {
-            if (! is_string($prop)
-                || preg_match('/^[A-Za-z][A-Za-z0-9_-]{0,127}$/D', $prop) !== 1) {
+            if (! is_string($prop) || preg_match('/^[A-Za-z][A-Za-z0-9_-]{0,127}$/D', $prop) !== 1) {
                 throw new InvalidArgumentException('Invalid Inertia refresh prop name.');
             }
         }
