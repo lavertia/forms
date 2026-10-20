@@ -68,6 +68,28 @@ final class Form extends AbstractComponent implements ComposesComponents
         return $this->withProp('submitLabel', $label);
     }
 
+    /**
+     * Reload only named Inertia page props following a successful mutation.
+     * Use a dedicated data prop instead of the entire Lavertia tree where
+     * possible. This is an explicit opt-in, not a whole-page browser refresh.
+     *
+     * @param  list<string>  $props
+     */
+    public function refreshOnSuccess(array $props): static
+    {
+        if ($props === [] || ! array_is_list($props)) {
+            throw new InvalidArgumentException('Refresh props must be a non-empty list.');
+        }
+
+        foreach ($props as $prop) {
+            if (! is_string($prop) || preg_match('/^[A-Za-z][A-Za-z0-9_-]{0,127}$/D', $prop) !== 1) {
+                throw new InvalidArgumentException('Invalid Inertia refresh prop name.');
+            }
+        }
+
+        return $this->withProp('refreshOnSuccess', array_values(array_unique($props)));
+    }
+
     /** @return array<string, mixed> */
     public function getProps(): array
     {

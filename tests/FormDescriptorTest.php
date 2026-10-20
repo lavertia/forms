@@ -53,12 +53,14 @@ final class FormDescriptorTest extends TestCase
 
     public function test_only_local_post_put_patch_actions_are_permitted(): void
     {
+        $rejected = 0;
+
         foreach (['get', 'delete', 'trace'] as $method) {
             try {
                 Form::make('profile')->method($method);
                 self::fail('Expected a method validation exception.');
             } catch (InvalidArgumentException) {
-                // Correct rejection.
+                $rejected++;
             }
         }
 
@@ -67,9 +69,36 @@ final class FormDescriptorTest extends TestCase
                 Form::make('profile')->action($url);
                 self::fail('Expected an action URL exception.');
             } catch (InvalidArgumentException) {
-                // Correct rejection.
+                $rejected++;
             }
         }
+
+        self::assertSame(7, $rejected);
+    }
+
+    public function test_form_can_opt_in_to_targeted_inertia_refresh(): void
+    {
+        $node = Form::make('profile')
+            ->refreshOnSuccess(['users', 'statistics', 'users'])
+            ->toArray();
+
+        self::assertSame(['users', 'statistics'], $node['props']->refreshOnSuccess);
+    }
+
+    public function test_refresh_props_must_use_safe_inertia_prop_names(): void
+    {
+        $rejected = 0;
+
+        foreach ([[], ['__proto__'], ['foo.bar'], [''], ['users', 12]] as $invalid) {
+            try {
+                Form::make('profile')->refreshOnSuccess($invalid);
+                self::fail('Expected invalid refresh props to fail.');
+            } catch (InvalidArgumentException) {
+                $rejected++;
+            }
+        }
+
+        self::assertSame(5, $rejected);
     }
 
     public function test_numeric_select_options_survive_php_serialization(): void
