@@ -83,14 +83,18 @@ final class FormDescriptorTest extends TestCase
 
     public function test_refresh_props_must_use_safe_inertia_prop_names(): void
     {
+        $rejected = 0;
+
         foreach ([[], ['__proto__'], ['foo.bar'], [''], ['users', 12]] as $invalid) {
             try {
                 Form::make('profile')->refreshOnSuccess($invalid);
                 self::fail('Expected invalid refresh props to fail.');
             } catch (InvalidArgumentException) {
-                // Expected.
+                $rejected++;
             }
         }
+
+        self::assertSame(5, $rejected);
     }
 
     public function test_numeric_select_options_survive_php_serialization(): void
