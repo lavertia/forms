@@ -37,7 +37,7 @@ final class RepeaterDescriptorTest extends TestCase
         self::assertSame(40, $node['props']->maxItems);
         self::assertSame(1, $node['props']->minItems);
         self::assertTrue($node['props']->clientSide);
-        self::assertSame('First', $node['props']->defaultRows[0]['description']);
+        self::assertSame('First', $node['props']->defaultRows[0]->description);
         self::assertSame(['text-input', 'text-input'], array_column($node['components'], 'type'));
         self::assertSame('root/description', $node['components'][0]['key']);
         self::assertJson(json_encode($node, JSON_THROW_ON_ERROR));
@@ -45,6 +45,8 @@ final class RepeaterDescriptorTest extends TestCase
 
     public function test_invalid_repeater_configuration_is_rejected(): void
     {
+        $rejected = 0;
+
         foreach ([
             fn () => Repeater::make('items with spaces'),
             fn () => Repeater::make('items')->maxItems(0),
@@ -58,9 +60,11 @@ final class RepeaterDescriptorTest extends TestCase
                 $invalid();
                 self::fail('Expected invalid repeater configuration to fail.');
             } catch (InvalidArgumentException) {
-                // Expected.
+                $rejected++;
             }
         }
+
+        self::assertSame(7, $rejected);
     }
 
     public function test_nested_repeaters_have_stable_protocol_keys(): void
