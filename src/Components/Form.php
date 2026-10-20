@@ -73,7 +73,7 @@ final class Form extends AbstractComponent implements ComposesComponents
      * Use a dedicated data prop instead of the entire Lavertia tree where
      * possible. This is an explicit opt-in, not a whole-page browser refresh.
      *
-     * @param list<string> $props
+     * @param  list<string>  $props
      */
     public function refreshOnSuccess(array $props): static
     {
