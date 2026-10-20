@@ -7,6 +7,7 @@ namespace Lavertia\Forms\Components;
 use InvalidArgumentException;
 use Lavertia\Support\Components\AbstractComponent;
 use Lavertia\Support\Components\SupportsComponents;
+use Lavertia\Support\Contracts\Component;
 use Lavertia\Support\Contracts\ComposesComponents;
 use Lavertia\Support\Contracts\FieldComponent;
 
@@ -43,7 +44,7 @@ final class Repeater extends AbstractComponent implements ComposesComponents, Fi
     }
 
     /**
-     * @param list<\Lavertia\Support\Contracts\Component> $components
+     * @param list<Component> $components
      */
     public function schema(array $components): static
     {
