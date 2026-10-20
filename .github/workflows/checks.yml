@@ -46,7 +46,7 @@ jobs:
           composer config repositories.lavertia-support '{"type":"path","url":"../support","options":{"symlink":true,"versions":{"lavertia/support":"0.1.0"}}}'
           composer install --no-interaction --prefer-dist --no-progress
           composer test
-          composer lint
+          composer lint || { ./vendor/bin/pint && git --no-pager diff -- src/Components/Form.php src/Components/Repeater.php; exit 1; }
 
   release-gate:
     name: PHP integration verification
